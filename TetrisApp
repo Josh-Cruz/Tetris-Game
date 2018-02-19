@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MY Tetris Game!</title>
+</head>
+<body>
+	
+<!-- CSS Goes Here -->
+<style>
+	* {
+	outline: 1px dotted red;
+}
+
+.empty {
+	width: 50px;
+	height: 50px;
+	background-color: rgb(13,45,65);
+	outline: 3px solid black;
+	display: inline-block;
+	}
+
+
+.squareShape {
+	width: 50px;
+	height: 50px;
+	outline: 3px solid black;
+	background-color:blue;
+	display: inline-block;
+	}
+
+.lShape{
+	width: 50px;
+	height: 50px;
+	outline: 3px solid black;
+	background-color:red;
+	display: inline-block;
+
+}
+
+</style>
+
+<!-- html goes here -->
+<div id="world">
+
+	<!-- write div.exmaple then hit tab! -->
+
+
+</div>
+
+
+
+
+<!-- //JS Goes here -->
+ <script type="text/javascript">
+	
+var world = [ 
+	[0,0,0,1,1,0,2,0], 
+	[0,0,0,1,1,0,2,0],  
+ 	[0,0,0,0,0,2,2,0], 
+ 	[0,0,0,0,0,0,0,0], 
+ 	[0,0,0,0,0,0,0,0], 
+ 	[0,0,0,0,0,0,0,0], 
+ 	[0,0,0,0,0,0,0,0], 
+ 	[0,0,0,0,0,0,0,0], 
+  	[0,0,0,0,0,0,0,0], 
+  	[0,0,0,0,0,0,0,0], 
+  	[0,0,0,0,0,0,0,0], 
+ 	[0,0,0,11,11,0,0,0], 
+  	[0,0,0,11,11,0,0,0], 
+];
+
+function drawWorld() {
+document.getElementById('world').innerHTML = "";
+	for (var y=0; y < world.length; y++){
+		// console.log(world[y]);
+			for(var x=0; x<world[y].length; x++){
+				// console.log(world[y][x]);
+			if (world[y][x] === 0) {
+				document.getElementById('world').innerHTML += "<div class='empty'></div>"
+			} else if(world[y][x] === 1 || world[y][x] === 11){
+				document.getElementById('world').innerHTML += "<div class='squareShape'></div>"
+			}
+			 else if(world[y][x] === 2 || world[y][x] === 12){
+				document.getElementById('world').innerHTML += "<div class='lShape'></div>"
+			}
+			}
+	}
+				document.getElementById('world').innerHTML += "<br>";
+	};
+	
+
+function moveShapesDown(){
+	var canMove = true;
+for (var y=0; y < world.length; y++){
+		for(var x=0; x<world[y].length; x++){
+			if (world[y][x] > 0 && world[y][x] < 10){
+				if (y === world.length-1 || world[y+1][x] >10){
+					canMove = false;
+					 freeze();
+				}
+			}
+		}
+	}
+
+	if (canMove) {
+		for (var y=world.length-1; y>=0 ; y--){
+		for(var x=0; x<world[y].length; x++){
+			if (world[y][x] > 0 && world[y][x] < 10){
+				world[y+1][x] = world[y][x];
+				world[y][x] = 0;
+		}	
+		}
+	}
+}
+}
+
+function freeze(){
+	for (var y=0; y < world.length; y++){
+		for(var x=0; x<world[y].length; x++){
+			world[y][x] = world[y][x] +10;
+
+		}
+	}
+
+resetWorld();
+
+}
+
+
+function resetWorld(){
+	world[0] = [0,0,0,0,0,0,0,0]
+	world[1] = [0,0,0,0,0,0,0,0]
+
+}
+
+// function dropNewBlock(){
+// 	world[0]=
+// }
+
+function gameLoop(){
+	console.log('game loop runnign');
+	moveShapesDown();
+	drawWorld();
+	setTimeout(gameLoop, 1000);
+
+}
+
+gameLoop();
+
+drawWorld();
+
+
+
+</script>
+
+
+
+</body>
+</html>
