@@ -40,12 +40,7 @@
 </style>
 
 <!-- html goes here -->
-<div id="world">
-
-	<!-- write div.exmaple then hit tab! -->
-
-
-</div>
+<div id="world"></div>
 
 
 
